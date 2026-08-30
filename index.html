@@ -23,6 +23,30 @@
             align-items: center;
             padding: 50px 20px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Кнопка переключения языка в верхнем правом углу */
+        .lang-switcher {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            color: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .lang-switcher:hover {
+            border-color: #6366f1;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         .container {
@@ -32,43 +56,21 @@
             margin: auto 0;
         }
 
-        /* --- Новые и доработанные анимации --- */
         @keyframes titleReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-                filter: blur(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
+            0% { opacity: 0; transform: translateY(-30px) scale(0.95); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         @keyframes descReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Никнейм с отдельной плавной анимацией */
         .profile-header h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -81,7 +83,6 @@
             opacity: 0;
         }
 
-        /* Описание с задержкой появления */
         .profile-header p {
             font-size: 1.15rem;
             color: #9ca3af;
@@ -92,7 +93,6 @@
             opacity: 0;
         }
 
-        /* Блок с тремя кнопками (появление чуть позже текста) */
         .nav-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -118,7 +118,6 @@
             overflow: hidden;
         }
 
-        /* Свечение и сдвиг при наведении */
         .nav-card:hover {
             transform: translateY(-10px) scale(1.02);
             border-color: #6366f1;
@@ -126,7 +125,6 @@
             box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
         }
 
-        /* Контейнер иконки */
         .icon-box {
             width: 60px;
             height: 60px;
@@ -143,7 +141,6 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* Стили для белых SVG-иконок */
         .icon-box svg {
             width: 28px;
             height: 28px;
@@ -163,7 +160,7 @@
             font-size: 0.9rem;
             color: #9ca3af;
             transition: color 0.3s;
-            animation: none !important; /* Убираем глобальную анимацию параграфа для карточек */
+            animation: none !important;
             opacity: 1 !important;
             max-width: none;
             margin: 0;
@@ -173,7 +170,6 @@
             color: #d1d5db;
         }
 
-        /* Подвал с плавной анимацией */
         footer {
             display: flex;
             gap: 25px;
@@ -193,7 +189,6 @@
             transform: translateY(-2px);
         }
 
-        /* Адаптивность для телефонов */
         @media (max-width: 768px) {
             .nav-grid {
                 grid-template-columns: 1fr;
@@ -201,11 +196,15 @@
             .profile-header h1 {
                 font-size: 2.2rem;
             }
+            .lang-switcher {
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
-
+    <a href="en/index.html" class="lang-switcher">EN</a>
     <div class="container">
         <div class="profile-header">
             <h1>CHERK</h1>
