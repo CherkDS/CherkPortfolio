@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0b0f;
+            color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 40px;
+            right: 20px;
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            color: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .lang-switcher:hover {
+            border-color: #6366f1;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .page-header {
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #6b7280 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #1f1f2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .project-info p {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .hidden-works-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hidden-works-container.open {
+            max-height: 1200px;
+        }
+
+        .toggle-btn {
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            color: #f3f4f6;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .toggle-btn:hover {
+            background: #1a1a24;
+            border-color: #6366f1;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .price-card {
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            border-radius: 16px;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #6366f1;
+            margin-bottom: 15px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .price-card ul li::before {
+            content: "✓ ";
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .review-card {
+            background: #141419;
+            border: 1px solid #1f1f2e;
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .review-card p {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .lang-switcher {
+                top: 15px;
+                right: 15px;
+            }
+            .projects-grid, .pricing-grid, .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../design.html" class="lang-switcher">RU</a>
+
+    <div class="container">
+        <a href="index.html" class="back-link fade-in">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Back to Home
+        </a>
+
+        <div class="page-header fade-in delay-1">
+            <h1>Graphic Design</h1>
+            <p>Creating clean and clear banners, promotional creatives, and basic social media branding.</p>
+        </div>
+
+        <section class="fade-in delay-2">
+            <h2>🔥 Recent Works</h2>
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-img">
+                        <img src="../photo_2026-07-01_16-32-13.jpg" alt="Team Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Team Banner</h3>
+                        <p>Beautiful roster design for a Telegram channel</p>
+                    </div>
+                </a>
+                <a href="#" class="project-card">
+                    <div class="project-img">
+                        <img src="../photo_2026-07-23_15-51-46.jpg" alt="Team Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Team Banner</h3>
+                        <p>Beautiful roster design for a Telegram channel</p>
+                    </div>
+                </a>
+            </div>
+
+            <button class="toggle-btn" id="toggleWorksBtn" onclick="toggleWorks()">
+                <span id="btnText">Show all works (archive)</span>
+                <svg id="arrowIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <div class="hidden-works-container" id="hiddenWorks">
+                <div class="projects-grid" style="margin-top: 20px;">
+                    <a href="#" class="project-card">
+                        <div class="project-img">
+                            <img src="../photo_2026-04-11_13-27-12.jpg" alt="Informative Post Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <h3>Informative Post Banner</h3>
+                            <p>Well-designed banner with information</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-img">
+                            <img src="../photo_2026-03-18_15-20-49.jpg" alt="Team Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <h3>Team Banner</h3>
+                            <p>Beautiful roster design for a Telegram channel</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-3">
+            <h2>💎 Services & Pricing</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div>
+                        <h3>Simple Banner</h3>
+                        <div class="price">from 100 ₽</div>
+                        <ul>
+                            <li>For social media or ads</li>
+                            <li>Fast turnaround time</li>
+                            <li>Free revisions</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/cherk122" target="_blank" class="toggle-btn" style="width: 100%; justify-content: center; margin-top: 10px;">Order</a>
+                </div>
+
+                <div class="price-card">
+                    <div>
+                        <h3>Animated Works Design</h3>
+                        <div class="price">from 200 ₽</div>
+                        <ul>
+                            <li>Basic animation</li>
+                            <li>Quick execution</li>
+                            <li>Free revisions</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/cherk122" target="_blank" class="toggle-btn" style="width: 100%; justify-content: center; margin-top: 10px;">Order</a>
+                </div>
+
+                <div class="price-card">
+                    <div>
+                        <h3>Custom Order</h3>
+                        <div class="price">By agreement</div>
+                        <ul>
+                            <li>Non-standard tasks</li>
+                            <li>Free revisions</li>
+                            <li>Quick execution</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/cherk122" target="_blank" class="toggle-btn" style="width: 100%; justify-content: center; margin-top: 10px;">Discuss</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-3">
+            <h2>💬 Reviews</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>«@cherk122 did everything with high quality and very beautifully»</p>
+                    <div class="review-author">— Client from Telegram</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function toggleWorks() {
+            const container = document.getElementById('hiddenWorks');
+            const btnText = document.getElementById('btnText');
+            const arrowIcon = document.getElementById('arrowIcon');
+            
+            container.classList.toggle('open');
+            
+            if (container.classList.contains('open')) {
+                btnText.textContent = 'Hide archive';
+                arrowIcon.style.transform = 'rotate(180deg)';
+            } else {
+                btnText.textContent = 'Show all works (archive)';
+                arrowIcon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>
